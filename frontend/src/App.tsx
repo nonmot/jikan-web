@@ -1,8 +1,18 @@
 import viteLogo from "/vite.svg";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
+import { useEffect } from "react";
 
 function App() {
+	useEffect(() => {
+		const fetchHealth = async () => {
+			const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/health`);
+			const status = await res.json();
+			console.log(status);
+		};
+		fetchHealth();
+	}, []);
+
 	return (
 		<>
 			<div>
