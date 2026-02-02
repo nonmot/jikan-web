@@ -1,0 +1,23 @@
+repos:
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  # Ruff version.
+  rev: v0.14.14
+  hooks:
+    # Run the linter.
+    - id: ruff-check
+      name: ruff (backend)
+      args: [--fix]
+      files: ^backend/
+    # Run the formatter.
+    - id: ruff-format
+      name: ruff-format (backend)
+      files: ^backend/
+- repo: https://github.com/biomejs/pre-commit
+  rev: "v2.0.6"  # タグやハッシュ値を指定してください
+  hooks:
+    - id: biome-check
+      name: biome (frontend)
+      language: system
+      pass_filenames: false
+      files: ^frontend/
+      entry: bash -lc 'cd frontend && pnpm biome check . --config-path biome.json'
