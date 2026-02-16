@@ -5,10 +5,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    environment:
+      JIKAN_DB_PATH: /data/database.db
+    volumes:
+      - ${JIKAN_PATH}:/data
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    environment:
+      VITE_API_BASE_URL: http://localhost:8080
     ports:
       - "5173:5173"

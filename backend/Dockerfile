@@ -3,10 +3,14 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /code
 
-COPY ./pyproject.toml /code/pyproject.toml
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends git ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
 
-RUN uv sync
+COPY ./pyproject.toml ./uv.lock ./
 
-COPY . /code
+RUN uv sync --frozen --no-install-project
 
-CMD ["uv", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8080"]
+COPY . .
+
+CMD ["uv", "run", "uvicorn", "src.app.main:app", "--host", "0.0.0.0", "--port", "8080"]
