@@ -4,7 +4,9 @@ import type { Tag } from "../../schemas/tag";
 import { ElapsedTime } from "../ElapsedTime";
 
 const getRunningEntry = async () => {
-	const res = await fetch("http://localhost:8000/entries/running");
+	const res = await fetch(
+		`${import.meta.env.VITE_API_BASE_URL}/entries/running`,
+	);
 
 	if (!res.ok) {
 		const text = await res.text().catch(() => "");
