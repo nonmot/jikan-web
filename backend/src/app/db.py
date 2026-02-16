@@ -3,6 +3,7 @@ from contextlib import contextmanager
 from pathlib import Path
 
 from jikan.db import reset_session_context_factory, set_session_context_factory
+from sqlalchemy import NullPool
 from sqlmodel import Session, create_engine
 
 from app.logging import logger
@@ -15,7 +16,13 @@ if db_path is None:
 
 
 def create_db_session_context() -> None:
-    engine = create_engine(f"sqlite:///{db_path}")
+    engine = create_engine(
+        f"sqlite:///{db_path}",
+        connect_args={
+            "check_same_thread": False,
+        },
+        poolclass=NullPool,
+    )
 
     @contextmanager
     def _session_context():

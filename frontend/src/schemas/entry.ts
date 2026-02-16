@@ -6,7 +6,8 @@ export const EntrySchema = z.object({
 	title: z.string(),
 	description: z.string().nullable(),
 	start_at: z.string(),
-	project: ProjectSchema,
+	end_at: z.string().nullable(),
+	project: ProjectSchema.nullable(),
 	tags: z.array(TagSchema),
 });
 
