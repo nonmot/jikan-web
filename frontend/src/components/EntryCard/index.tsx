@@ -63,7 +63,7 @@ export const EntryCard = () => {
 				) : null}
 
 				<div className="mt-1 text-2xl font-semibold text-slate-900">
-					{entry.title ? entry.title : "No title"}
+					<h2>{entry.title ? entry.title : "No title"}</h2>
 					<span className="text-slate-500"> #{entry.id}</span>
 				</div>
 
