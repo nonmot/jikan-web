@@ -38,6 +38,7 @@ def running_entry() -> EntryDTO | None:
     return EntryDTO(
         id=entry.id,
         title=entry.title,
+        description=entry.description,
         start_at=entry.start_at.replace(tzinfo=UTC).isoformat().replace("+00:00", "Z"),
         end_at=entry.end_at.astimezone(UTC).isoformat().replace("+00:00", "Z") if entry.end_at else None,
         project=project_dto,

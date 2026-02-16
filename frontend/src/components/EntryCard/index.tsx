@@ -48,7 +48,7 @@ export const EntryCard = () => {
 	if (!entry) {
 		return (
 			<div>
-				<div className="rounded-xl border bg-white p-4 shadow-sm">
+				<div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
 					<div>No running entry</div>
 				</div>
 			</div>
@@ -56,42 +56,47 @@ export const EntryCard = () => {
 	}
 
 	return (
-		<div className="rounded-xl border bg-white p-4 shadow-sm">
-			{entry.project ? (
-				<div className="text-sm text-slate-500">{entry.project.name}</div>
-			) : null}
+		<div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm grid grid-cols-2">
+			<div>
+				{entry.project ? (
+					<div className="text-slate-500">{entry.project.name}</div>
+				) : null}
 
-			<div className="mt-1 text-base font-semibold text-slate-900">
-				{entry.title ? entry.title : "No title"}
-			</div>
-
-			<div className="mt-2 text-sm text-slate-600">
-				{entry.description ? entry.description : ""}
-			</div>
-
-			<div className="mt-3 grid grid-cols-2 gap-3 text-sm">
-				<div>
-					<div className="text-xs text-slate-500">Started</div>
-					<div className="text-slate-900">{parseDatetime(entry.start_at)}</div>
+				<div className="mt-1 text-2xl font-semibold text-slate-900">
+					{entry.title ? entry.title : "No title"}
+					<span className="text-slate-500"> #{entry.id}</span>
 				</div>
-				<div>
-					<div className="text-xs text-slate-500">Elapsed</div>
-					<ElapsedTime entry={entry} />
-				</div>
-			</div>
 
-			{entry.tags && entry.tags.length > 0 ? (
-				<div className="mt-3 flex flex-wrap gap-2">
-					{entry.tags.map((tag: Tag) => (
-						<span
-							key={tag.name}
-							className="rounded-full border px-2 py-0.5 text-xs text-slate-700"
-						>
-							{tag.name}
-						</span>
-					))}
+				<div className="mt-2 text-slate-600">
+					{entry.description ? entry.description : ""}
 				</div>
-			) : null}
+
+				<div className="mt-3 text-sm">
+					<div>
+						<div className="text-slate-500">Started</div>
+						<div className="text-slate-900">
+							{parseDatetime(entry.start_at)}
+						</div>
+					</div>
+				</div>
+
+				{entry.tags && entry.tags.length > 0 ? (
+					<div className="mt-3 flex flex-wrap gap-2">
+						{entry.tags.map((tag: Tag) => (
+							<span
+								key={tag.name}
+								className="rounded-full border px-2 py-0.5 text-xs text-slate-700"
+							>
+								{tag.name}
+							</span>
+						))}
+					</div>
+				) : null}
+			</div>
+			<div>
+				<div className="text-slate-500">Elapsed</div>
+				<ElapsedTime entry={entry} />
+			</div>
 		</div>
 	);
 };

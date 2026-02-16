@@ -3,6 +3,7 @@ import { ProjectSchema } from "./project";
 import { TagSchema } from "./tag";
 
 export const EntrySchema = z.object({
+	id: z.number(),
 	title: z.string(),
 	description: z.string().nullable(),
 	start_at: z.string(),

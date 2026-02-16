@@ -11,12 +11,14 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
 		<QueryClientProvider client={queryClient}>
-			<main className="mx-auto container my-10">
-				<BrowserRouter>
-					<Routes>
-						<Route path="/" element={<HomePage />} />
-					</Routes>
-				</BrowserRouter>
+			<main className="bg-slate-100 min-h-screen">
+				<div className="mx-auto container py-10">
+					<BrowserRouter>
+						<Routes>
+							<Route path="/" element={<HomePage />} />
+						</Routes>
+					</BrowserRouter>
+				</div>
 			</main>
 		</QueryClientProvider>
 	</StrictMode>,

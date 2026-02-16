@@ -5,13 +5,6 @@ const calcElapsedTime = (now: number, startAtStr: string) => {
 	const startAt = Date.parse(startAtStr);
 	const elapsedSec = Math.floor((now - startAt) / 1000);
 
-	console.log("startat str: ", startAtStr);
-	console.log(
-		"startat: ",
-		new Date(startAt).toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" }),
-	);
-	console.log("now: ", new Date(now));
-
 	const mm = Math.floor(elapsedSec / 60);
 	const ss = String(elapsedSec % 60).padStart(2, "0");
 	return `${mm}:${ss}`;
@@ -31,7 +24,7 @@ export const ElapsedTime = (props: Props) => {
 	}, []);
 
 	return (
-		<div className="text-2xl font-semibold text-emerald-700">
+		<div className="text-4xl xl:text-9xl font-semibold text-emerald-700">
 			{calcElapsedTime(now, entry.start_at)}
 		</div>
 	);
